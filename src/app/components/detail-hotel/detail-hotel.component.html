@@ -1,0 +1,38 @@
+<div class="container d-flex justify-content-center my-4">
+  <button type="button" class="btn" (click)="onDisplayHotels()">
+    <i class="fa-solid fa-arrow-left-long"></i>
+  </button>
+  <div
+    class="card justify-content-center align-items-center w-50 shadow-lg"
+    *ngIf="hotel"
+    style="width: 700px"
+  >
+    <div class="w-100">
+      <img
+        [src]="urlHost + '/photo/' + hotel.id"
+        alt="{{ hotel.name }}"
+        class="w-100 p-2"
+        style="height: 400px"
+      />
+    </div>
+    <div class="card-body text-center w-100">
+      <h5 class="card-title">{{ hotel.name }}</h5>
+      <div class="stars">
+        <span
+          *ngFor="let star of starRating"
+          class="fa fa-star"
+          [ngClass]="{ 'fa-star': star <= hotel.star }"
+        ></span>
+      </div>
+      <p class="card-text">{{ hotel.address }}</p>
+      <p class="card-text">{{ hotel.phone }}</p>
+      <p class="card-text">{{ hotel.room }}</p>
+      <div class="d-flex justify-content-end">
+        <span>{{ hotel.price }} €</span>
+      </div>
+    </div>
+    <!-- <div class="card-body w-100 d-flex justify-content-end pt-0" *ngIf="this.authService.isAdmin()">
+            <button type="button" class="btn btn-success" (click)="onUpdateTraining(training)">Modifier</button>
+        </div> -->
+  </div>
+</div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { City } from 'src/app/model/city.model';
 import { Hotel } from 'src/app/model/hotel.model';
 import { ApiService } from 'src/app/services/api.service';
@@ -17,7 +18,7 @@ export class HotelsComponent implements OnInit {
   starRating : number[] = [1,2,3,4,5];
   urlHost : string = environment.host;
 
-  constructor(private apiService : ApiService) { }
+  constructor(private apiService : ApiService, private router : Router) { }
 
   ngOnInit(): void {
     this.getAllHotels();
@@ -46,6 +47,10 @@ export class HotelsComponent implements OnInit {
       error : (err) => this.error = err,
       complete : () => this.error = null
     })
+  }
+
+  onHotelDetail(hotel : Hotel){
+    this.router.navigate(['/hotels', hotel.id]);
   }
 
 }
