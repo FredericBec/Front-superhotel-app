@@ -1,0 +1,26 @@
+<div class="container">
+  <ng-container *ngIf="listHotels; else loading">
+    <div class="h-100 row mx-4 justify-content-center">
+      <div class="card shadow col-4 m-2 w-25" *ngFor="let hotel of listHotels">
+        <img src="..." class="card-img-top" alt="{{ hotel.name }}" />
+        <div class="card-body">
+          <h5 class="card-title fw-bold">{{ hotel.name }}</h5>
+          <div class="stars">
+            <span
+              *ngFor="let star of starRating"
+              class="fa fa-star"
+              [ngClass]="{ 'fa-star': star <= hotel.star }"
+            ></span>
+          </div>
+          <p class="card-text d-flex justify-content-end fw-bold">
+            dès {{ hotel.price | currency : "EUR" }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template #loading>
+    <div>loading...</div>
+  </ng-template>
+</div>
