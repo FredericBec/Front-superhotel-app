@@ -1,8 +1,26 @@
 <div class="container">
   <ng-container *ngIf="listHotels; else loading">
+    <ul class="nav nav-pills">
+      <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="#">Tous les hôtels</a>
+      </li>
+      <li class="nav-item" *ngFor="let city of listCities">
+        <a
+          class="nav-link"
+          aria-current="page"
+          (click)="getAllHotelsByCity(city)"
+          >{{ city.name }}</a
+        >
+      </li>
+    </ul>
+
     <div class="h-100 row mx-4 justify-content-center">
       <div class="card shadow col-4 m-2 w-25" *ngFor="let hotel of listHotels">
-        <img src="..." class="card-img-top" alt="{{ hotel.name }}" />
+        <img
+          [src]="urlHost + '/photo/' + hotel.id"
+          class="card-img-top"
+          alt="{{ hotel.name }}"
+        />
         <div class="card-body">
           <h5 class="card-title fw-bold">{{ hotel.name }}</h5>
           <div class="stars">
