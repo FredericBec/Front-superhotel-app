@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Hotel } from '../model/hotel.model';
 import { environment } from 'src/environments/environment';
 import { City } from '../model/city.model';
-import { env } from 'process';
 
 @Injectable({
   providedIn: 'root'
@@ -49,7 +48,7 @@ export class ApiService {
   }
 
   public updateCity(id : number, city : City){
-    
+    return this.http.put<City>(environment.host + "/cities/" + id, city);
   }
 
   public deleteCity(id : number){
@@ -72,5 +71,9 @@ export class ApiService {
             .set('username', username)
             .set('password', password);
     return this.http.post<any>(environment.auth + "/login", body, {headers, observe : 'response'});
+  }
+
+  public changePicture(trainingId : number , file : FormData){
+    return this.http.post<any>(environment.host + "/photo/" + trainingId  , file);
   }
 }
