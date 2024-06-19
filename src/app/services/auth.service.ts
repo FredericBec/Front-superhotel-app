@@ -70,12 +70,12 @@ export class AuthService {
 
   /**
    * Fonction pour vérifier que le rôle de l'utilisateur
-   * @returns vrai si l'utilisateur a le rôle User
+   * @returns vrai si l'utilisateur a le rôle Manager
    */
-  isUser(): boolean{
+  isManager(): boolean{
     let role = this.getRoles();
     if(role && role?.length > 0){
-      if(role.includes("USER")) return true;
+      if(role.includes("MANAGER")) return true;
     }
     return false;
   }
