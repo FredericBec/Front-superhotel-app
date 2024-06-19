@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Hotel } from '../model/hotel.model';
 import { environment } from 'src/environments/environment';
@@ -54,5 +54,23 @@ export class ApiService {
 
   public deleteCity(id : number){
     return this.http.delete<City>(environment.host + "/cities/" + id);
+  }
+
+  /**
+   * Requête permettant la connexion de l'utilisateur via jwt
+   * en passant un body avec le username et le password encrypté
+   * et le header nécessaire
+   * @param username rentré par l'utilisateur
+   * @param password rentré par l'utilisateur
+   * @returns un observable de type HttpResponse
+   */
+  public getLoginByUsernamePassword(username : string, password : string){
+    const headers = new HttpHeaders({
+      'Content-Type' : 'application/x-www-form-urlencoded'
+    })
+    const body = new HttpParams()
+            .set('username', username)
+            .set('password', password);
+    return this.http.post<any>(environment.auth + "/login", body, {headers, observe : 'response'});
   }
 }
