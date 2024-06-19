@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { City } from 'src/app/model/city.model';
 import { Hotel } from 'src/app/model/hotel.model';
 import { ApiService } from 'src/app/services/api.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -17,8 +18,11 @@ export class HotelsComponent implements OnInit {
   error : any;
   starRating : number[] = [1,2,3,4,5];
   urlHost : string = environment.host;
+  collapseState : {[key : number] : boolean} = {};
+  selectedFile: File | null = null;
+	selectedIdHotel : number| null = null;
 
-  constructor(private apiService : ApiService, private router : Router) { }
+  constructor(private apiService : ApiService, private router : Router, public authService : AuthService) { }
 
   ngOnInit(): void {
     this.getAllHotels();
@@ -52,5 +56,46 @@ export class HotelsComponent implements OnInit {
   onHotelDetail(hotel : Hotel){
     this.router.navigate(['/hotels', hotel.id]);
   }
+
+  onDeleteHotel(id : number){
+    if(confirm('Voulez-vous supprimer l\'hotel ' + id + ' ?')){
+      this.apiService.deleteHotel(id).subscribe();
+    }
+  }
+
+  onUpdateHotel(hotel : Hotel){
+    this.router.navigate(['/hotels', hotel.id]);
+  }
+
+  onFileSelected(event: any , eventIdHotel : number) 
+	{
+		this.selectedFile = event.target.files[0];
+		this.selectedIdHotel = eventIdHotel
+	}
+
+	changePicture(hotelId: number) 
+	{
+		if (this.selectedFile) 
+		{
+			const data = new FormData();
+			data.append("file" , this.selectedFile)
+			this.apiService.changePicture(hotelId , data).subscribe();
+		}
+	}
+
+	annulePicture()
+	{
+		this.selectedFile = null
+		this.selectedIdHotel = null
+		
+	}
+
+  isOpen(id : number){
+		this.collapseState[id] = !this.collapseState[id];
+	}
+
+	isCollapse(id : number){
+		return this.collapseState[id];
+	}
 
 }

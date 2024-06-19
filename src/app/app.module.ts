@@ -9,6 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { DetailHotelComponent } from './components/detail-hotel/detail-hotel.component';
 import { LoginoutComponent } from './components/loginout/loginout.component';
+import { UnauthorizeAccessComponent } from './components/error/unauthorize-access/unauthorize-access.component';
+import { HotelComponent } from './components/hotel/hotel.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { LoginoutComponent } from './components/loginout/loginout.component';
     HotelsComponent,
     PageNotFoundComponent,
     DetailHotelComponent,
-    LoginoutComponent
+    LoginoutComponent,
+    UnauthorizeAccessComponent,
+    HotelComponent
   ],
   imports: [
     BrowserModule,
