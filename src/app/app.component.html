@@ -18,13 +18,21 @@
       </ul>
     </div>
     <div class="navbar-nav">
-      <!-- <label class="nav-link" for="username" *ngIf="this.authService.getUsername()">Bonjour, {{this.authService.getUsername()}}</label> -->
-      <!-- <a class="nav-link" routerLink="/login">
-          <i class="fa-solid fa-arrow-right-from-bracket fa-xl" *ngIf="this.authService.isConnected() else logout"></i>
-          <ng-template #logout>
-            <i class="fa-solid fa-arrow-right-to-bracket fa-xl"></i>
-          </ng-template>
-        </a> -->
+      <label
+        class="nav-link"
+        for="username"
+        *ngIf="this.authService.getUsername()"
+        >Bonjour, {{ this.authService.getUsername() }}</label
+      >
+      <a class="nav-link" routerLink="/login">
+        <i
+          class="fa-solid fa-arrow-right-from-bracket fa-xl"
+          *ngIf="this.authService.isConnected(); else logout"
+        ></i>
+        <ng-template #logout>
+          <i class="fa-solid fa-arrow-right-to-bracket fa-xl"></i>
+        </ng-template>
+      </a>
     </div>
   </div>
 </nav>
