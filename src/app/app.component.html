@@ -6,8 +6,25 @@
         <li class="navbar-item">
           <a class="nav-link"> </a>
         </li>
-        <li *ngIf="this.authService.isAdmin()" class="navbar-item">
-          <a href="#" class="nav-link" routerLink="/hotel">Ajouter un hôtel</a>
+        <li
+          *ngIf="this.authService.isAdmin()"
+          class="navbar-item"
+          [routerLinkActive]="['active']"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <a href="#" class="nav-link" [routerLink]="['/hotel']"
+            >Ajouter un hôtel</a
+          >
+        </li>
+        <li
+          *ngIf="this.authService.isAdmin()"
+          class="navbar-item"
+          [routerLinkActive]="['active']"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <a href="#" class="nav-link" [routerLink]="['/cities']"
+            >Gestion des villes</a
+          >
         </li>
       </ul>
     </div>

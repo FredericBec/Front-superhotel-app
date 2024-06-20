@@ -1,0 +1,45 @@
+<div class="container">
+  <a class="btn btn-primary mt-4" routerLink="/city">Ajouter une ville</a>
+  <div class="card my-4">
+    <div class="card-header">Liste des villes</div>
+    <div class="card-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Hôtels</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let city of listCities">
+            <td>{{ city.id }}</td>
+            <td>{{ city.name }}</td>
+            <td class="row">
+              <ul class="list-group list-group-horizontal">
+                <li
+                  class="list-group-item"
+                  *ngFor="let hotel of getHotelByCity(city.id)"
+                >
+                  {{ hotel.name }}
+                </li>
+              </ul>
+            </td>
+            <td>
+              <button class="btn btn-danger" (click)="onDeleteCity(city.id)">
+                Supprimer
+              </button>
+            </td>
+            <td>
+              <button class="btn btn-success" (click)="onUpdateCity(city)">
+                Modifier
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
