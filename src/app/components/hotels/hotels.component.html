@@ -68,11 +68,11 @@
           <p class="card-text d-flex justify-content-end fw-bold">
             dès {{ hotel.price | currency : "EUR" }}
           </p>
-          <div class="d-flex justify-content-end mt-3" *ngIf="this.authService.isAdmin()">
-            <button type="button" class="btn btn-danger mx-2" (click)="onDeleteHotel(hotel.id)">
+          <div class="d-flex justify-content-end mt-3">
+            <button type="button" class="btn btn-danger mx-2" (click)="onDeleteHotel(hotel.id)" *ngIf="this.authService.isAdmin()">
               Supprimer
             </button>
-            <button type="button" class="btn btn-success" (click)="onUpdateHotel(hotel)">
+            <button type="button" class="btn btn-success" (click)="onUpdateHotel(hotel)" *ngIf="this.authService.isManager()">
               Modifier
             </button>
           </div>
