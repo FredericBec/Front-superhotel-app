@@ -1,38 +1,92 @@
-<div class="container d-flex justify-content-center my-4">
-  <button type="button" class="btn" (click)="onDisplayHotels()">
-    <i class="fa-solid fa-arrow-left-long"></i>
-  </button>
-  <div
-    class="card justify-content-center align-items-center w-50 shadow-lg"
-    *ngIf="hotel"
-    style="width: 700px"
-  >
-    <div class="w-100">
-      <img
-        [src]="urlHost + '/photo/' + hotel.id"
-        alt="{{ hotel.name }}"
-        class="w-100 p-2"
-        style="height: 400px"
-      />
+<div class="container d-flex justify-content-center my-4" *ngIf="!this.authService.isAdmin() else updateHotel">
+  <div class="card shadow-lg" *ngIf="hotel" style="width: 700px">
+    <div class="w-100 d-flex justify-content-start">
+      <button type="button" class="btn" (click)="onDisplayHotels()">
+        <i class="fa-solid fa-arrow-left-long"></i>
+      </button>
     </div>
-    <div class="card-body text-center w-100">
-      <h5 class="card-title">{{ hotel.name }}</h5>
-      <div class="stars">
-        <span
-          *ngFor="let star of starRating"
-          class="fa fa-star"
-          [ngClass]="{ 'fa-star': star <= hotel.star }"
-        ></span>
-      </div>
-      <p class="card-text">{{ hotel.address }}</p>
-      <p class="card-text">{{ hotel.phone }}</p>
-      <p class="card-text">{{ hotel.room }}</p>
-      <div class="d-flex justify-content-end">
-        <span>{{ hotel.price }} €</span>
+    <div class="d-flex flex-row">
+      <img [src]="urlHost + '/photo/' + hotel.id" alt="{{ hotel.name }}" class="w-75 p-2" style="height: 300px;" />
+      <div class="card-body w-50">
+        <h5 class="card-title fw-bold">{{ hotel.name }}</h5>
+        <div class="stars">
+          <span *ngFor="let star of starRating" class="fa fa-star" [ngClass]="{ 'fa-star': star <= hotel.star }"></span>
+        </div>
+        <div class="my-2">
+          <p class="card-text">{{ hotel.address }}</p>
+        </div>
+        <div class="d-flex flex-row my-2">
+          <i class="fa-solid fa-phone"></i>
+          <p class="card-text mx-2">{{ hotel.phone }}</p>
+        </div>
+        <div class="my-2">
+          <p class="card-text">{{ hotel.room }} chambres</p>
+        </div>
+        <div class="d-flex justify-content-end my-4 fw-semibold">
+          <span>Dès {{ hotel.price | currency : 'EUR'}} la nuit</span>
+        </div>
       </div>
     </div>
-    <!-- <div class="card-body w-100 d-flex justify-content-end pt-0" *ngIf="this.authService.isAdmin()">
-            <button type="button" class="btn btn-success" (click)="onUpdateTraining(training)">Modifier</button>
-        </div> -->
   </div>
 </div>
+<ng-template #updateHotel>
+  <div class="d-flex justify-content-center my-4">
+    <div class="card justify-content-center align-items-center shadow-lg" *ngIf="hotel" style="width: 700px;">
+        <div class="w-100">
+            <button type="button" class="btn" (click)="onDisplayHotels()"><i class="fa-solid fa-arrow-left-long"></i></button>
+        </div>
+        <div class="card-body d-flex justify-content-around">
+            <form [formGroup]="hotelForm" (ngSubmit)="onSubmit(hotelForm)" class=" d-flex">
+                <div class="d-flex flex-column justify-content-around">
+                    <div class="d-flex justify-content-center" >
+                        <img [src]="urlHost + '/photo/' + hotel.id" alt="{{hotel.name}}"  class="w-100 p-2" style="height: 300px;">
+                    </div>
+                    <div class="p-2 d-flex flex-column align-items-start justify-content-end">
+                        <label for="fileInput" class="my-2">Choisissez une nouvelle image :</label>
+                        <input type="file" formControlName="photo" class="custom-file my-2" id="fileInput" accept="image/*" name="file" (change)="onPictureSelect($event)">
+                    </div>
+                </div>
+                <div>
+                    <div style="min-width: 300px;">
+                        <div class="form-group">
+                            <label for="name">Nom :</label>
+                            <input type="text" required formControlName="name" class="form-control" name="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Adresse :</label>
+                            <input type="text" required formControlName="address" class="form-control" name="address">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Téléphone :</label>
+                            <input type="text" required formControlName="phone" class="form-control" name="phone">
+                          </div>
+                        <div class="form-group">
+                            <label class="control-label">Nombre d'étoiles :</label>
+                            <input type="text" required formControlName="star" class="form-control" name="star">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Nombre de chambres :</label>
+                            <input type="text" required formControlName="room" class="form-control" name="room">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Prix de la nuit:</label>
+                            <input type="text" required formControlName="price" class="form-control" name="price">
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label">Ville :</label>
+                          <select class="form-control" formControlName="city" name="city">
+                            <option *ngFor="let city of listCities" [ngValue]="city">
+                              {{ city.name }}
+                            </option>
+                          </select>
+                        </div>
+                    </div>
+                    <div class="card-body w-100 d-flex justify-content-end pt-0">
+                        <button type="submit" class="btn btn-primary mt-4">Modifier</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+  </div>
+</ng-template>
