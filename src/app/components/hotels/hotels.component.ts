@@ -21,6 +21,7 @@ export class HotelsComponent implements OnInit {
   collapseState : {[key : number] : boolean} = {};
   selectedFile: File | null = null;
 	selectedIdHotel : number| null = null;
+  selectedCity : City | undefined;
 
   constructor(private apiService : ApiService, private router : Router, public authService : AuthService) { }
 
@@ -47,7 +48,10 @@ export class HotelsComponent implements OnInit {
 
   getAllHotelsByCity(city : City){
     this.apiService.getHotelsByCity(city.id).subscribe({
-      next : (data) => this.listHotels = data,
+      next : (data) => {
+        this.selectedCity = city;
+        this.listHotels = data
+      },
       error : (err) => this.error = err,
       complete : () => this.error = null
     })
@@ -59,7 +63,10 @@ export class HotelsComponent implements OnInit {
 
   onDeleteHotel(id : number){
     if(confirm('Voulez-vous supprimer l\'hotel ' + id + ' ?')){
-      this.apiService.deleteHotel(id).subscribe();
+      this.apiService.deleteHotel(id).subscribe({
+        error : (err) => this.error = err.message,
+        complete : () => this.getAllHotels()
+      });
     }
   }
 
