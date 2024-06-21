@@ -12,7 +12,7 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class CityComponent implements OnInit {
 
-  listHotels : Hotel[] |undefined;
+  listHotels : Hotel[] = [];
   city : City | undefined;
   isUpdateForm : boolean |undefined;
   cityForm!: FormGroup;
@@ -39,11 +39,16 @@ export class CityComponent implements OnInit {
 		{
 			this.apiService.getCityById(cityId).subscribe((data) => 
 			{
+        this.apiService.getHotelsByCity(cityId).subscribe({
+          next : (data) => this.listHotels = data,
+          error : (err) => this.error = err.message
+        })
         if(this.cityForm)
 					{
 					this.cityForm.patchValue(
 					{
-						name : data.name
+						name : data.name,
+            hotel : this.listHotels
 					})
 				}
 			});
