@@ -1,7 +1,7 @@
 <div class="container">
   <a class="btn btn-primary mt-4" routerLink="/city">Ajouter une ville</a>
   <div class="card my-4">
-    <div class="card-header">Liste des villes</div>
+    <div class="card-header" style="background-color: #B7FFF6;">Liste des villes</div>
     <div class="card-body">
       <table class="table table-striped">
         <thead>
@@ -19,11 +19,8 @@
             <td>{{ city.name }}</td>
             <td class="row">
               <ul class="list-group list-group-horizontal">
-                <li
-                  class="list-group-item"
-                  *ngFor="let hotel of getHotelByCity(city.id)"
-                >
-                  {{ hotel.name }}
+                <li class="list-group-item" *ngFor="let hotel of getHotelByCity(city.id)">
+                  <a class="btn p-0" (click)="onDetailHotel(hotel)">{{ hotel.name }}</a>
                 </li>
               </ul>
             </td>

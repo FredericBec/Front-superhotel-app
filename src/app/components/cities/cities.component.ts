@@ -49,4 +49,8 @@ export class CitiesComponent implements OnInit {
     this.router.navigate(['city', city.id]);
   }
 
+  onDetailHotel(hotel : Hotel){
+    this.router.navigate(['hotels', hotel.id]);
+  }
+
 }
