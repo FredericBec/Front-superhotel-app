@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Hotel } from '../model/hotel.model';
 import { environment } from 'src/environments/environment';
 import { City } from '../model/city.model';
+import { HotelManager } from '../model/hotel-manager.model';
 
 @Injectable({
   providedIn: 'root'
@@ -75,5 +76,29 @@ export class ApiService {
 
   public changePicture(trainingId : number , file : FormData){
     return this.http.post<any>(environment.host + "/photo/" + trainingId  , file);
+  }
+
+  public getHotelManagers(){
+    return this.http.get<HotelManager[]>(environment.host + "/hotelManagers");
+  }
+
+  public addNewHotelManager(hotelManager : HotelManager){
+    return this.http.post<HotelManager>(environment.host + "/hotelManagers", hotelManager);
+  }
+
+  public updateHotelManager(id : number, hotelManager : HotelManager){
+    return this.http.put<HotelManager>(environment.host + "/hotelManagers/" + id, hotelManager);
+  }
+
+  public deleteHotelManager(id : number){
+    return this.http.delete<HotelManager>(environment.host + "/hotelManagers/" + id);
+  }
+
+  public getHotelManagerById(id : number){
+    return this.http.get<HotelManager>(environment.host + "/hotelManagers/" + id);
+  }
+
+  public getHotelsByHotelManager(id : number){
+    return this.http.get<Hotel[]>(environment.host + "/hotels/hotelManager/" + id);
   }
 }
