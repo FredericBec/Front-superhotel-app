@@ -1,0 +1,49 @@
+<div class="container">
+    <a class="btn btn-primary mt-4" routerLink="/hotelManager">Ajouter un manager</a>
+    <div class="card my-4">
+      <div class="card-header" style="background-color: #B7FFF6;">Liste des managers d'hôtels</div>
+      <div class="card-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nom</th>
+              <th>Prénom</th>
+              <th>Hôtels</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let hotelManager of listHotelManagers">
+              <td>{{ hotelManager.id }}</td>
+              <td>{{ hotelManager.name }}</td>
+              <td>{{ hotelManager.firstName }}</td>
+              <td class="row">
+                <ul class="list-group list-group-horizontal">
+                    <ng-container *ngIf="getHotelByHotelManager(hotelManager.id)?.length else noHotels">
+                        <li class="list-group-item" *ngFor="let hotel of getHotelByHotelManager(hotelManager.id)">
+                          <a class="btn p-0" (click)="onDetailHotel(hotel)">{{ hotel.name }}</a>
+                        </li>
+                    </ng-container>
+                    <ng-template #noHotels>
+                        <li class="list-group-item">Ne gère pas d'hôtels</li>
+                    </ng-template>
+                </ul>
+              </td>
+              <td>
+                <button class="btn btn-danger" (click)="onDeleteHotelManager(hotelManager.id)">
+                  Supprimer
+                </button>
+              </td>
+              <td>
+                <button class="btn btn-success" (click)="onUpdateHotelManager(hotelManager)">
+                  Modifier
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>

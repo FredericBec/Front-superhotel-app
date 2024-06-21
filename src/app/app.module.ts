@@ -14,6 +14,8 @@ import { HotelComponent } from './components/hotel/hotel.component';
 import { CitiesComponent } from './components/cities/cities.component';
 import { CityComponent } from './components/city/city.component';
 import { JwtInterceptorInterceptor } from './jwt-interceptor.interceptor';
+import { HotelManagersComponent } from './components/hotel-managers/hotel-managers.component';
+import { HotelManagerComponent } from './components/hotel-manager/hotel-manager.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { JwtInterceptorInterceptor } from './jwt-interceptor.interceptor';
     UnauthorizeAccessComponent,
     HotelComponent,
     CitiesComponent,
-    CityComponent
+    CityComponent,
+    HotelManagersComponent,
+    HotelManagerComponent
   ],
   imports: [
     BrowserModule,

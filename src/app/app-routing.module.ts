@@ -9,6 +9,8 @@ import { AdminGuard } from './guards/admin.guard';
 import { UnauthorizeAccessComponent } from './components/error/unauthorize-access/unauthorize-access.component';
 import { CitiesComponent } from './components/cities/cities.component';
 import { CityComponent } from './components/city/city.component';
+import { HotelManagersComponent } from './components/hotel-managers/hotel-managers.component';
+import { HotelManagerComponent } from './components/hotel-manager/hotel-manager.component';
 
 const routes: Routes = [
   {path : 'hotels', component : HotelsComponent},
@@ -17,6 +19,9 @@ const routes: Routes = [
   {path : 'cities', component : CitiesComponent, canActivate : [AdminGuard]},
   {path : 'city', component : CityComponent, canActivate : [AdminGuard]},
   {path : 'city/:id', component : CityComponent, canActivate : [AdminGuard]},
+  {path : 'hotelManagers', component : HotelManagersComponent, canActivate : [AdminGuard]},
+  {path : 'hotelManager', component : HotelManagerComponent, canActivate : [AdminGuard]},
+  {path : 'hotelManager/:id', component : HotelManagerComponent, canActivate : [AdminGuard]},
   {path : 'login', component : LoginoutComponent},
   {path : '', redirectTo : 'hotels', pathMatch : 'full'},
   {path : '403', component : UnauthorizeAccessComponent},
