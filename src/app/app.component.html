@@ -1,7 +1,4 @@
-<nav
-  class="navbar navbar-expand-sm navbar-light shadow-sm"
-  style="background-color: #b7fff6"
->
+<nav class="navbar navbar-expand-sm navbar-light shadow-sm" style="background-color: #b7fff6">
   <div class="container-fluid">
     <a href="#" class="navbar-brand fw-bold">Super-hotel.fr</a>
     <div class="collapse navbar-collapse">
@@ -9,40 +6,24 @@
         <li class="navbar-item">
           <a class="nav-link"> </a>
         </li>
-        <li
-          *ngIf="this.authService.isAdmin()"
-          class="navbar-item"
-          [routerLinkActive]="['active']"
-          [routerLinkActiveOptions]="{ exact: true }"
-        >
-          <a href="#" class="nav-link" [routerLink]="['/hotel']"
-            >Ajouter un hôtel</a
-          >
+        <li *ngIf="this.authService.isAdmin()" class="navbar-item" [routerLinkActive]="['active']"
+          [routerLinkActiveOptions]="{ exact: true }">
+          <a href="#" class="nav-link" [routerLink]="['/hotel']">Ajouter un hôtel</a>
         </li>
-        <li
-          *ngIf="this.authService.isAdmin()"
-          class="navbar-item"
-          [routerLinkActive]="['active']"
-          [routerLinkActiveOptions]="{ exact: true }"
-        >
-          <a href="#" class="nav-link" [routerLink]="['/cities']"
-            >Gestion des villes</a
-          >
+        <li *ngIf="this.authService.isAdmin()" class="navbar-item" [routerLinkActive]="['active']"
+          [routerLinkActiveOptions]="{ exact: true }">
+          <a href="#" class="nav-link" [routerLink]="['/cities']">Gestion des villes</a>
+        </li>
+        <li *ngIf="this.authService.isAdmin()" class="navbar-item">
+          <a href="#" class="nav-link" [routerLink]="['/hotelManagers']">Gestion des managers</a>
         </li>
       </ul>
     </div>
     <div class="navbar-nav">
-      <label
-        class="nav-link"
-        for="username"
-        *ngIf="this.authService.getUsername()"
-        >Bonjour, {{ this.authService.getUsername() }}</label
-      >
+      <label class="nav-link" for="username" *ngIf="this.authService.getUsername()">Bonjour, {{
+        this.authService.getUsername() }}</label>
       <a class="nav-link" routerLink="/login">
-        <i
-          class="fa-solid fa-arrow-right-from-bracket fa-xl"
-          *ngIf="this.authService.isConnected(); else logout"
-        ></i>
+        <i class="fa-solid fa-arrow-right-from-bracket fa-xl" *ngIf="this.authService.isConnected(); else logout"></i>
         <ng-template #logout>
           <i class="fa-solid fa-arrow-right-to-bracket fa-xl"></i>
         </ng-template>
