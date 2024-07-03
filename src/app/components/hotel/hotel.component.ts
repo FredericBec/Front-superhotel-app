@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { City } from 'src/app/model/city.model';
+import { HotelManager } from 'src/app/model/hotel-manager.model';
 import { Hotel } from 'src/app/model/hotel.model';
 import { ApiService } from 'src/app/services/api.service';
 
@@ -13,6 +14,7 @@ import { ApiService } from 'src/app/services/api.service';
 export class HotelComponent implements OnInit {
 
   listCities : City[] | undefined;
+  listManagers : HotelManager[] | undefined;
   hotel : Hotel | undefined;
   hotelForm!: FormGroup;
   city : City | undefined;
@@ -27,8 +29,9 @@ export class HotelComponent implements OnInit {
       star : [0, [Validators.required]],
       room : [0, [Validators.required]],
       price : [0, [Validators.required]],
-      photo : [''],
+      photo : [null],
       city : ['', [Validators.required]],
+      hotelManager : ['', [Validators.required]]
     })
   }
 
@@ -38,6 +41,11 @@ export class HotelComponent implements OnInit {
       error : (err) => this.error = err.message,
       complete : () => this.error = null
     });
+    this.apiService.getHotelManagers().subscribe({
+      next : (data) => this.listManagers = data,
+      error : (err) => this.error = err.message,
+      complete : () => this.error = null
+    })
   }
 
   onSubmit(form : FormGroup){

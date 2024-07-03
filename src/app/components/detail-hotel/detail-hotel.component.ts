@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { City } from 'src/app/model/city.model';
+import { HotelManager } from 'src/app/model/hotel-manager.model';
 import { Hotel } from 'src/app/model/hotel.model';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -16,6 +17,7 @@ export class DetailHotelComponent implements OnInit {
 
   hotel : Hotel | undefined;
   listCities : City[] | undefined;
+  listHotelManager : HotelManager[] | undefined;
   city : City | undefined;
   urlHost : string = environment.host;
   starRating : number[] = [1,2,3,4,5];
@@ -38,10 +40,22 @@ export class DetailHotelComponent implements OnInit {
     });
     
     this.apiService.getCities().subscribe({
-      next : (data) => this.listCities = data,
+      next : (data) => {
+        this.listCities = data,
+        this.getCity()
+      },
       error : (err) => this.error = err.message,
       complete : () => this.error = null
     });
+
+    this.apiService.getHotelManagers().subscribe({
+      next : (data) => {
+        this.listHotelManager = data,
+        this.getHotelManager()
+      },
+      error : (err) => this.error = err.message,
+      complete : () => this.error = null
+    })
   }
 
   onDisplayHotels(){
@@ -58,9 +72,24 @@ export class DetailHotelComponent implements OnInit {
         star : [this.hotel?.star, [Validators.required]],
         room : [this.hotel?.room, [Validators.required]],
         price : [this.hotel?.price, [Validators.required]],
-        photo : [''],
-        city : [this.hotel?.city, [Validators.required]],
+        photo : [null],
+        city : [null, [Validators.required]],
+        manager : [null, [Validators.required]]
       })
+    }
+  }
+
+  getCity(){
+    if(this.hotel && this.listCities){
+      const hotelCity = this.listCities.find(city => city.id === this.hotel?.city.id);
+      if(hotelCity) this.hotelForm.patchValue({city : hotelCity})
+    }
+  }
+
+  getHotelManager(){
+    if(this.hotel && this.listHotelManager){
+      const hotelManager = this.listHotelManager.find(manager => manager.id === this.hotel?.hotelManager.id);
+      if(hotelManager) this.hotelForm.patchValue({manager : hotelManager})
     }
   }
 

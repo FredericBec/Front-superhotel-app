@@ -2,7 +2,7 @@
   <div class="card col-md-5 rounded-lg shadow-lg mx-auto mt-5">
     <div class="card-header">Ajout d'un hôtel</div>
     <div class="card-body">
-      <form [formGroup]="hotelForm" (ngSubmit)="onSubmit(hotelForm)">
+      <form [formGroup]="hotelForm" class="row g-3" (ngSubmit)="onSubmit(hotelForm)">
         <div>
           <label for="name">Nom :</label>
           <input type="text" required formControlName="name" class="form-control" name="name" />
@@ -42,7 +42,7 @@
             </div>
           </div>
         </div>
-        <div>
+        <div class="col-md-4">
           <label for="place">Nombre d'étoiles :</label>
           <input type="text" required formControlName="star" class="form-control" name="star" />
           <div *ngIf="
@@ -55,8 +55,8 @@
             </div>
           </div>
         </div>
-        <div>
-          <label for="place">Nombre de chambres :</label>
+        <div class="col-md-4">
+          <label for="place">Nbre de chambres :</label>
           <input type="text" required formControlName="room" class="form-control" name="room" />
           <div *ngIf="
               hotelForm.controls['room'].invalid &&
@@ -68,7 +68,7 @@
             </div>
           </div>
         </div>
-        <div>
+        <div class="col-md-4">
           <label for="place">Prix d'une nuit :</label>
           <input type="text" required formControlName="price" class="form-control" name="price" />
           <div *ngIf="
@@ -81,11 +81,19 @@
             </div>
           </div>
         </div>
-        <div class="form-group">
+        <div class="col-md-6">
           <label class="control-label">Ville :</label>
           <select class="form-control" formControlName="city" name="city">
             <option *ngFor="let city of listCities" [ngValue]="city">
               {{ city.name }}
+            </option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label class="control-label">Gestionnaire d'hôtels :</label>
+          <select class="form-control" formControlName="hotelManager" name="hotelManager">
+            <option *ngFor="let hotelManager of listManagers" [ngValue]="hotelManager">
+              {{ hotelManager.name }}
             </option>
           </select>
         </div>
