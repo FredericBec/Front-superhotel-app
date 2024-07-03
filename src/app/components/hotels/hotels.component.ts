@@ -86,7 +86,10 @@ export class HotelsComponent implements OnInit {
 		{
 			const data = new FormData();
 			data.append("file" , this.selectedFile)
-			this.apiService.changePicture(hotelId , data).subscribe();
+			this.apiService.changePicture(hotelId , data).subscribe({
+        error : (err) => this.error = err.message,
+        complete : () => this.getAllHotels()
+      });
 		}
 	}
 
@@ -94,7 +97,7 @@ export class HotelsComponent implements OnInit {
 	{
 		this.selectedFile = null
 		this.selectedIdHotel = null
-		
+		console.log(this.selectedFile);
 	}
 
   isOpen(id : number){
