@@ -19,9 +19,14 @@
             <td>{{ city.name }}</td>
             <td class="row">
               <ul class="list-group list-group-horizontal">
-                <li class="list-group-item" *ngFor="let hotel of getHotelByCity(city.id)">
-                  <a class="btn p-0" (click)="onDetailHotel(hotel)">{{ hotel.name }}</a>
-                </li>
+                <ng-container *ngIf="getHotelByCity(city.id)?.length else noHotel">
+                  <li class="list-group-item" *ngFor="let hotel of getHotelByCity(city.id)">
+                    <a class="btn p-0" (click)="onDetailHotel(hotel)">{{ hotel.name }}</a>
+                  </li>
+                </ng-container>
+                <ng-template #noHotel>
+                  <li class="list-group-item">Ne possède pas d'hôtel</li>
+                </ng-template>
               </ul>
             </td>
             <td>
