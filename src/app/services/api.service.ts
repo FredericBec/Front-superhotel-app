@@ -20,6 +20,10 @@ export class ApiService {
     return this.http.get<Hotel[]>(environment.host + "/hotels/city/" + id);
   }
 
+  public getHotelsByKeyword(keyword : string){
+    return this.http.get<Hotel[]>(environment.host + "/hotels/?keyword=" + keyword);
+  }
+
   public getHotel(id : number){
     return this.http.get<Hotel>(environment.host + "/hotels/" + id);
   }

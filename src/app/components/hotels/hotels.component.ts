@@ -57,6 +57,14 @@ export class HotelsComponent implements OnInit {
     })
   }
 
+  getAllHotelsByKeyword(keyword : string){
+    this.apiService.getHotelsByKeyword(keyword).subscribe({
+      next : (data) => this.listHotels = data,
+      error : (err) => this.error = err.message,
+      complete : () => this.error = null
+    })
+  }
+
   onHotelDetail(hotel : Hotel){
     this.router.navigate(['/hotels', hotel.id]);
   }
