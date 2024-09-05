@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "sonar": "sonar-scanner -Dsonar.projectKey=Front-superhotel -Dsonar.sources=. -Dsonar.host.url=http://localhost:9000 -Dsonar.login=sqp_bdecf197fa6f895306ead10cdb80dca898cc874c"
   },
   "private": true,
   "dependencies": {
