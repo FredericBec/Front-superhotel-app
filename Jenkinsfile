@@ -35,7 +35,7 @@ pipeline {
         stage('Code analysis') {
             steps {
                 script{
-                    bat 'sonar-scanner'
+                    bat 'npm run sonar'
                 }
             }
         }
