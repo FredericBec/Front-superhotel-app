@@ -27,7 +27,7 @@ pipeline {
         stage('Unit Tests') {
             steps {
                 script{
-                    bat 'npm test -- --single-run --no-watch'
+                    bat 'npm test'
                 }
             }
         }
