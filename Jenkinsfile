@@ -34,7 +34,7 @@ pipeline {
 
         stage('Code analysis') {
             steps {
-                script{
+                withSonarQubeEnv('SonarQube'){
                     bat '''sonar-scanner -Dsonar.projectKey=Front-superhotel -Dsonar.sources=. -Dsonar.host.url=http://localhost:9000 -Dsonar.login=sqp_bdecf197fa6f895306ead10cdb80dca898cc874c'''
                 }
             }
