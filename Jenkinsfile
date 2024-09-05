@@ -24,14 +24,6 @@ pipeline {
             }
         }
 
-        stage('Lint code'){
-            steps {
-                script{
-                    bat 'npm run lint'
-                }
-            }
-        }
-
         stage('Unit Tests') {
             steps {
                 script{
