@@ -30,7 +30,9 @@
               "src/styles.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "sonarToken": "sqp_bdecf197fa6f895306ead10cdb80dca898cc874c",
+            "sonar.host.url": "http://localhost:9000"
           },
           "configurations": {
             "production": {
