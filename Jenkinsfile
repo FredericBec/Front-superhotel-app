@@ -34,10 +34,11 @@ pipeline {
 
         stage('Code analysis') {
             steps {
+                script {
+                    sonarHome = tool 'SonarScanner'
+                }
                 withSonarQubeEnv('Sonar-scanner') {
-                    script {
-                        bat 'sonar-scanner'
-                    }
+                    bat '${sonarHome}/bin/sonar-scanner'
                 }
             }
         }
