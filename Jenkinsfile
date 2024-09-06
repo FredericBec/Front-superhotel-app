@@ -41,7 +41,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    bat 'npm run build -- --prod'
+                    bat 'npm run build'
                 }
             }
         }
