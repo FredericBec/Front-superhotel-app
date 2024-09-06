@@ -53,6 +53,25 @@ pipeline {
                 }
             }
         }
+
+        stage('Build image') {
+            steps {
+                script {
+                    bat 'docker build -t akhisa/front-superhotel:latest .'
+                }
+            }
+        }
+
+        stage('push docker image to dockerhub') {
+            steps {
+                script {
+                    withCredentials([string(credentialsId:'docker-hub-pwd', variable:'DOCKER_HUB_PWD')]) {
+                        bat 'docker login -u akhisa -p %DOCKER_HUB_PWD%'
+                    }
+                    bat 'docker push akhisa/front-superhotel:latest'
+                }
+            }
+        }
     }
 
     post {
